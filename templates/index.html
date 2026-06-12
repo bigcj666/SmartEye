@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartEye - AI视觉对话</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">👁</div>
+                <div class="logo-text">
+                    <h1>SmartEye</h1>
+                    <span>AI视觉对话助手</span>
+                </div>
+            </div>
+            <div class="status">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">未连接</span>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="video-area">
+                <div class="video-container">
+                    <video id="video" autoplay playsinline muted></video>
+                    <canvas id="canvas" style="display:none;"></canvas>
+                    
+                    <div class="video-placeholder" id="video-placeholder">
+                        <div class="video-placeholder-icon">📷</div>
+                        <p>点击下方按钮开启摄像头</p>
+                    </div>
+                    
+                    <div class="video-overlay">
+                        <div class="listening-badge" id="listening-badge">
+                            <div class="listening-dot"></div>
+                            <span>聆听中</span>
+                        </div>
+                        <span id="resolution-text"></span>
+                    </div>
+                </div>
+
+                <div class="video-controls">
+                    <button id="btn-camera" class="btn btn-camera">
+                        <span>📷</span>
+                        <span>开启摄像头</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-area">
+                <div class="chat-header">对话记录</div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message system">
+                        <p>开启摄像头和麦克风后，AI将看到画面并聆听</p>
+                        <p>AI会根据你的说话内容判断是否需要回答</p>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <button id="btn-mic" class="btn-mic-toggle" title="开启麦克风">
+                        <span class="mic-icon">🎤</span>
+                    </button>
+                    <input type="text" id="text-input" placeholder="输入消息或开启麦克风语音对话...">
+                    <button id="btn-send">发送</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
