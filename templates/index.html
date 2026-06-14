@@ -24,7 +24,7 @@
 
         <main class="main">
             <div class="video-area">
-                <div class="video-container">
+                <div class="video-container" id="video-container">
                     <video id="video" autoplay playsinline muted></video>
                     <canvas id="canvas" style="display:none;"></canvas>
                     
@@ -54,15 +54,15 @@
                 <div class="chat-header">对话记录</div>
                 <div class="chat-messages" id="chat-messages">
                     <div class="message system">
-                        <p>开启摄像头和麦克风后，AI将看到画面并聆听</p>
-                        <p>AI会根据你的说话内容判断是否需要回答</p>
+                        <p>开启摄像头后，按住麦克风按钮说话</p>
+                        <p>松开后自动识别语音并发送给AI</p>
                     </div>
                 </div>
                 <div class="chat-input">
-                    <button id="btn-mic" class="btn-mic-toggle" title="开启麦克风">
+                    <button id="btn-mic" class="btn-mic-toggle" title="按住说话">
                         <span class="mic-icon">🎤</span>
                     </button>
-                    <input type="text" id="text-input" placeholder="输入消息或开启麦克风语音对话...">
+                    <input type="text" id="text-input" placeholder="输入消息或按住麦克风说话...">
                     <button id="btn-send">发送</button>
                 </div>
             </div>

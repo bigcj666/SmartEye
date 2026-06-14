@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>摄像头测试</title></head>
+<body>
+<h1>摄像头测试</h1>
+<video id="v" autoplay playsinline style="width:300px;background:#000;"></video>
+<p id="status"></p>
+<button onclick="test()">测试摄像头</button>
+<script>
+async function test() {
+    const s = document.getElementById('status');
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({video: true});
+        document.getElementById('v').srcObject = stream;
+        s.textContent = '成功';
+        s.style.color = 'green';
+    } catch(e) {
+        s.textContent = '失败: ' + e.name + ' - ' + e.message;
+        s.style.color = 'red';
+    }
+}
+</script>
+</body>
+</html>

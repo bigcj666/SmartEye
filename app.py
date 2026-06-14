@@ -1,5 +1,6 @@
 import os
 import base64
+import httpx
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -12,7 +13,8 @@ CORS(app)
 
 client = OpenAI(
     api_key=os.getenv("MIMO_API_KEY"),
-    base_url=os.getenv("MIMO_BASE_URL")
+    base_url=os.getenv("MIMO_BASE_URL"),
+    http_client=httpx.Client(proxy=None, trust_env=False)
 )
 
 SYSTEM_PROMPT = """你是SmartEye，一个AI视觉对话助手。你能通过摄像头实时看到用户周围的环境。
@@ -28,6 +30,11 @@ SYSTEM_PROMPT = """你是SmartEye，一个AI视觉对话助手。你能通过摄
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/test")
+def test():
+    return render_template("test.html")
 
 
 @app.route("/api/chat", methods=["POST"])
@@ -65,6 +72,30 @@ def chat():
         )
         reply = response.choices[0].message.content
         return jsonify({"reply": reply})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/transcribe", methods=["POST"])
+def transcribe():
+    data = request.json
+    audio_b64 = data.get("audio")
+    if not audio_b64:
+        return jsonify({"error": "No audio data"}), 400
+
+    data_url = f"data:audio/wav;base64,{audio_b64}"
+    messages = [{"role": "user", "content": [
+        {"type": "input_audio", "input_audio": {"data": data_url, "format": "wav"}}
+    ]}]
+
+    try:
+        response = client.chat.completions.create(
+            model="mimo-v2.5-asr",
+            messages=messages,
+            max_tokens=200
+        )
+        text = response.choices[0].message.content
+        return jsonify({"text": text})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
