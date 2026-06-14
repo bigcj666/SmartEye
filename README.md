@@ -4,8 +4,8 @@ AI视觉对话助手 - 七牛云AI程序设计比赛
 
 ## Demo视频
 
-通过网盘分享的文件：演示视频.mp4
-链接: https://pan.baidu.com/s/1ICm5Ywg__9PNItXgHOTj_A?pwd=5ce7 提取码: 5ce7
+通过网盘分享的文件：演示demo.mp4
+链接: https://pan.baidu.com/s/1K4hk50iDfjiuNyGGE86bCg?pwd=mjbm 提取码: mjbm
 
 ## 功能
 
